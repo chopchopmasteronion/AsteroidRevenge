@@ -1,18 +1,18 @@
 ﻿#pragma strict
+public class Asteroid extends MonoBehaviour {
+	function Start () {
 
-function Start () {
-
-}
-
-function Update () {
-	if(this.gameObject.transform.position.y !=10)
-	{
-	stable();
 	}
-}
 
-function stable()
-{
-	this.gameObject.transform.position.y = 10;
+	function Update () {
+		if(this.gameObject.transform.position.y !=10)
+		{
+		stable();
+		}
+	}
 
+	public function stable()
+	{
+		this.gameObject.transform.position.y = 10;
+	}
 }

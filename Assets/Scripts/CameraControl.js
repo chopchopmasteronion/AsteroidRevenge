@@ -20,7 +20,6 @@ follow();
 
 function follow() {
 	astPos = asteroid.transform.position;
-	//astPos.y+= camDist;
 	cam.transform.position.x= astPos.x;
 	cam.transform.position.z= astPos.z;
 	topDist(asteroid.GetComponent(Control).getVelocity());
@@ -52,14 +51,12 @@ function topDist(astVel: Vector3) {
 function zoom(direction: int){ //greator than zero zooms out less than zero zooms in
  if(direction > 0){
  	if(cam.transform.position.y < maxDist){
- 		Debug.Log("zoom out");
- 		cam.transform.Translate(0, variableCamDist, 0);
+ 		cam.transform.position.y+=variableCamDist * Time.deltaTime;
  	}
  }
  else if(direction < 0){
  	if(cam.transform.position.y > minDist){
- 	 	Debug.Log("zoom in");
- 		cam.transform.Translate(0, -variableCamDist, 0);
+ 		cam.transform.position.y+=-variableCamDist * Time.deltaTime;
  	}
  }
 }
