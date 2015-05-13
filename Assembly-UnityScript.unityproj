@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Control.js" />
      <Compile Include="Assets\Scripts\Explosion.js" />
      <Compile Include="Assets\Scripts\Fasteroid.js" />
+     <Compile Include="Assets\Scripts\Laser.js" />
      <Compile Include="Assets\Scripts\Ship.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

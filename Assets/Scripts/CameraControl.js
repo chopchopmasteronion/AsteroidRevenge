@@ -15,14 +15,16 @@ cam = GetComponent.<Camera>();
 }
 
 function Update () {
-follow();
+	follow();
 }
 
 function follow() {
+	if(asteroid != null) {
 	astPos = asteroid.transform.position;
 	cam.transform.position.x= astPos.x;
 	cam.transform.position.z= astPos.z;
 	topDist(asteroid.GetComponent(Control).getVelocity());
+	}
 }
 
 function topDist(astVel: Vector3) {
