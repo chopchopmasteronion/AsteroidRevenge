@@ -1,12 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ship.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Fasteroid.js">
     <Files>
-      <File FileName="Assets\Scripts\Asteroid.js" Line="33" Column="1" />
-      <File FileName="Assets\Scripts\CameraControl.js" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\Fasteroid.js" Line="8" Column="21" />
-      <File FileName="Assets\Scripts\Ship.js" Line="27" Column="47" />
-      <File FileName="Assets\Scripts\Laser.js" Line="20" Column="1" />
+      <File FileName="Assets\Scripts\Fasteroid.js" Line="4" Column="1" />
+      <File FileName="Assets\Scripts\Asteroid.js" Line="11" Column="1" />
+      <File FileName="Assets\Scripts\Control.js" Line="15" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
