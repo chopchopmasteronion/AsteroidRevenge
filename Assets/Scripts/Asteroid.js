@@ -27,7 +27,7 @@ public class Asteroid extends MonoBehaviour {
 		Debug.Log("hit1");
 		contact = hit.contacts[0];
 		Debug.Log("hit2");
-		if(hit.gameObject.name == "Laser(Clone)"){
+		if(hit.gameObject.name == "Laser(Clone)" || hit.gameObject.name == "barrier"){
 			split(contact.point);
 		}
 	}

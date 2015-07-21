@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Asteroid.js" />
+     <Compile Include="Assets\Scripts\Barrier.js" />
      <Compile Include="Assets\Scripts\CameraControl.js" />
      <Compile Include="Assets\Scripts\Control.js" />
      <Compile Include="Assets\Scripts\Explosion.js" />
