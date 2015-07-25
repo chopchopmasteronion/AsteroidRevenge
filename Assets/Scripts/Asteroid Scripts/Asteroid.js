@@ -1,8 +1,7 @@
 ﻿#pragma strict
-public class Asteroid extends MonoBehaviour {
+public class Asteroid extends SpaceObject {
 	var size: float;
 	var fasteroid: GameObject;
-	var rigbod: Rigidbody;
 	var splitForce: float;
 	var contact: ContactPoint;
 	
@@ -17,16 +16,9 @@ public class Asteroid extends MonoBehaviour {
 			stable();
 		}
 	}
-
-	public function stable()
-	{
-		this.gameObject.transform.position.y = 10;
-	}
 	
 	function OnCollisionEnter(hit: Collision){
-		Debug.Log("hit1");
 		contact = hit.contacts[0];
-		Debug.Log("hit2");
 		if(hit.gameObject.name == "Laser(Clone)" || hit.gameObject.name == "barrier"){
 			split(contact.point);
 		}
@@ -36,7 +28,6 @@ public class Asteroid extends MonoBehaviour {
 		var astObj: GameObject;
 		decrementSize(1);
 		splitPoint = Quaternion.Euler(0, -90, 0) * splitPoint/10;
-		Debug.Log(splitPoint);
 		if(size > 0.0) {
 			var astPos = this.transform.localPosition + splitPoint;
 			astObj=Instantiate(fasteroid, astPos, transform.localRotation);
