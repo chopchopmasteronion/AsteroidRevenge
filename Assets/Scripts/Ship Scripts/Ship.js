@@ -1,7 +1,5 @@
 ﻿#pragma strict
 public class Ship extends SpaceObject {
-	var contact: ContactPoint;
-	var rotation: Quaternion;
 	var position: Vector3;
 	var explosionPrefab: GameObject;
 	var laser: GameObject;
@@ -27,6 +25,8 @@ public class Ship extends SpaceObject {
 	function Update () {
 		stable();
 		patrol();
+		Boost(2);
+		Shoot();
 	}
 
 
@@ -38,7 +38,7 @@ public class Ship extends SpaceObject {
 	function Shoot() {
 		if(shootTimer < 0) {
 			
-			Instantiate(laser, this.cannon.transform.position, this.cannon.transform.rotation);
+			Instantiate(laser, this.cannon.transform.position , this.cannon.transform.rotation);
 			shootTimer = shootTime;
 			}
 		else {
@@ -50,24 +50,24 @@ public class Ship extends SpaceObject {
 	function turn(direction:int, ammount:int)
 	{	
 		if(direction == 1){
-			this.transform.Rotate(this.transform.forward * ammount * Time.deltaTime, Space.World);
+			this.transform.Rotate(this.transform.right * ammount * Time.deltaTime, Space.World);
 		}
 		else{
-			this.transform.Rotate(-this.transform.forward * ammount * Time.deltaTime, Space.World);
+			this.transform.Rotate(-this.transform.right * ammount * Time.deltaTime, Space.World);
 		}
 
 	}
 	
 	function Boost(speed:int)
 	{
-		transform.Translate(-Vector3.up * speed * Time.deltaTime);
+		transform.Translate(Vector3.forward * speed * Time.deltaTime);
 	}
 	
 	
 	function OnTriggerEnter(other : Collider)
 	{
 		var direction : Vector3 = other.transform.position - transform.position;
-        var angle : float = Vector3.Angle(direction, transform.up);
+        var angle : float = Vector3.Angle(direction, transform.forward);
 		Debug.Log(angle + " at " + other.gameObject.tag);
 //		if(other.gameObject.tag == "Barrier")
 //		{

@@ -9,7 +9,7 @@ public class Laser extends MonoBehaviour {
 	}
 
 	function Update () {
-		this.transform.Translate(-this.transform.forward * speed * Time.deltaTime); //negative cause retarded
+		this.transform.Translate(-this.transform.forward * speed * Time.deltaTime); 
 		timeToLive-=Time.deltaTime;
 		if(timeToLive < 0) {
 			GameObject.Destroy(this.gameObject);
