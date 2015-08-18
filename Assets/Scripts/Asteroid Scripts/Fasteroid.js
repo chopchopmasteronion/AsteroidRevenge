@@ -6,7 +6,7 @@ public class Fasteroid extends Asteroid {
 	var moveTimer: float;
 	
 	function Start () {
-	startingForce = Random.Range(1,3);
+	startingForce = Random.Range(0,2);
 	moveDirection = randomMovement();
 	rigbod = GetComponent.<Rigidbody>();
 	}

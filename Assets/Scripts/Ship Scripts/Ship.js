@@ -8,6 +8,7 @@ public class Ship extends SpaceObject {
 	var turnSpeed: int;
 	var startDir: int;
 	var speed: float;
+	var target: Transform;
 	private var col : SphereCollider;
 	private var shootTimer: float;
 
@@ -25,7 +26,7 @@ public class Ship extends SpaceObject {
 	function Update () {
 		stable();
 		patrol();
-		Boost(2);
+		//Boost(2);
 		Shoot();
 	}
 
@@ -120,11 +121,14 @@ public class Ship extends SpaceObject {
 	{}
 	
 	function follow()
-	{}
+	{
+	
+	}
 	
 	function patrol()
 	{	
-		
+		var agent = GetComponent.<NavMeshAgent>();
+        agent.destination = target.position; 
 		
 	}
 	

@@ -12,6 +12,6 @@ public class SpaceObject extends MonoBehaviour {
 	
 	public function stable()
 	{
-		this.gameObject.transform.position.y = 10;
+		this.gameObject.transform.position.y = 0;
 	}
 }
