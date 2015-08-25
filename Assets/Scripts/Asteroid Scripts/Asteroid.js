@@ -4,6 +4,7 @@ public class Asteroid extends SpaceObject {
 	var fasteroid: GameObject;
 	var splitForce: float;
 	var contact: ContactPoint;
+	var nav: NavMeshAgent;
 	
 	function Start () {
 		this.gameObject.transform.localScale = new Vector3(size, size, size);
@@ -11,7 +12,7 @@ public class Asteroid extends SpaceObject {
 	}
 
 	function Update () {
-		if(this.gameObject.transform.position.y !=10)
+		if(this.gameObject.transform.position.y !=0)
 		{
 			stable();
 		}
