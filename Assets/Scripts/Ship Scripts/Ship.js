@@ -7,29 +7,46 @@ public class Ship extends SpaceObject {
 	var cannon: GameObject;
 	var turnSpeed: int;
 	var startDir: int;
-	var speed: float;
 	var target: Transform;
+	var waypoints: Transform[];
+	var waypointIndex: int;
+	var patrolTimer: float;
+	var objectInSight: boolean;
+	var playerInRange: boolean;
+	var fieldOfViewAngle: float = 110f;
+	var player: GameObject;
+	private var nav : NavMeshAgent; 
 	private var col : SphereCollider;
 	private var shootTimer: float;
-
-	
-	//test vars delete these
-	var testTime: float; 
 	
 	function Start () {
+		getCannon();
+		player = GameObject.FindGameObjectWithTag("Player");
 		shootTimer = shootTime;
 		startDir = Random.Range(0,2);
 		rigbod = GetComponent.<Rigidbody>();
 		col = GetComponent(SphereCollider);
+		nav = GetComponent(NavMeshAgent);
+		waypointIndex = Random.Range(0,(waypoints.length - 1));
 	}
 
 	function Update () {
 		stable();
-		patrol();
-		//Boost(2);
-		Shoot();
+		Debug.Log(player.transform.position);
+		if(playerInRange){
+			follow(nav);
+		} else {
+			patrol();
+		}
+		
+		if(objectInSight) {
+			Shoot();
+		}
 	}
-
+	
+	function getCannon() {
+		cannon = this.gameObject.transform.GetChild(0).gameObject;
+	}
 
 	function OnCollisionEnter(hit: Collision) {
 		GameObject.Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -48,88 +65,63 @@ public class Ship extends SpaceObject {
 		
 	}
 	
-	function turn(direction:int, ammount:int)
-	{	
-		if(direction == 1){
-			this.transform.Rotate(this.transform.right * ammount * Time.deltaTime, Space.World);
-		}
-		else{
-			this.transform.Rotate(-this.transform.right * ammount * Time.deltaTime, Space.World);
-		}
+	
+	function OnTriggerStay(other : Collider)
+	{
+		if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player) {
+			objectInSight = false;
+			var direction : Vector3 = other.transform.position - transform.position;
+	        var angle : float = Vector3.Angle(direction, transform.forward);
+	        if(other.gameObject == player) {
+	        	playerInRange = true;
+	        }
+	        if(angle < fieldOfViewAngle * 0.5f)
+	        {
+	            var hit : RaycastHit;   
+	            // ... and if a raycast towards the player hits something...
+	            if(Physics.Raycast(transform.position + transform.up, direction.normalized, hit, col.radius))
+	            {
+	                // ... and if the raycast hits the player...
+	                if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player)
+	                {
+	                    // ... the player is in sight.
+	                    objectInSight = true;
+	                    // Set the last global sighting is the players current position.
+	                    //lastPlayerSighting.position = player.transform.position;
 
+	                }
+	            }
+	        }
+		}
 	}
 	
-	function Boost(speed:int)
+	function OnTriggerExit (other : Collider)
 	{
-		transform.Translate(Vector3.forward * speed * Time.deltaTime);
+	    // If the player leaves the trigger zone...
+	    if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player)
+	        // ... the player is not in sight.
+	        objectInSight = false;
+	        //playerInRange = false;
 	}
+
 	
-	
-	function OnTriggerEnter(other : Collider)
+	function follow(agent : NavMeshAgent)
 	{
-		var direction : Vector3 = other.transform.position - transform.position;
-        var angle : float = Vector3.Angle(direction, transform.forward);
-		Debug.Log(angle + " at " + other.gameObject.tag);
-//		if(other.gameObject.tag == "Barrier")
-//		{
-//			//turn(1);
-//		}
-//		else if(other.gameObject.tag == "Asteroid")
-//		{
-//			if((angle >= 90) &&  (angle <= 270))
-//			{
-//				Debug.Log("Asteroid in sight");
-//				var hit : RaycastHit;
-//				if(Physics.Raycast(transform.position + transform.forward, direction.normalized, hit, col.radius))
-//	            {
-//	                // ... and if the raycast hits the player...
-//	                if(hit.collider.gameObject.tag == "Asteroid")
-//	                {
-//	                    // ... the player is in sight.
-//	                    Shoot();
-//	                }
-//	            }
-//				Debug.Log("front");
-//				 if(angle <= 180)
-//				 {
-//				 	Debug.Log("right");
-//				 	turn(1);
-//				 }
-//				 else
-//				 {
-//				 	Debug.Log("left");
-//				 	turn(0);
-//				 }
-//				}
-//		}
-//		else if(other.gameObject.tag == "Ship")
-//		{
-//			turnAway();
-//		}
-//		else if(other.gameObject.tag == "Fasteroid")
-//		{
-//			turnTowards();
-//		}
+		//agent = GetComponent.<NavMeshAgent>();
+        agent.destination = player.transform.position; 
 	}
 	
-	function turnTowards()
-	{
-		Debug.Log("Entered");
-	}
-	
-	function turnAway()
-	{}
-	
-	function follow()
-	{
-	
-	}
+
 	
 	function patrol()
 	{	
-		var agent = GetComponent.<NavMeshAgent>();
-        agent.destination = target.position; 
-		
+		patrolTimer += Time.deltaTime;
+		if(patrolTimer >= 10)
+        {
+	        waypointIndex = Random.Range(0,(waypoints.length - 1));
+	        patrolTimer = 0;
+	    }
+        	nav.destination = waypoints[waypointIndex].position;
 	}
 	
 }
