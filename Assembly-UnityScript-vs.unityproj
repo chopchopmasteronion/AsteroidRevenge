@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\CameraControl.js" />
      <Compile Include="Assets\Scripts\Explosion.js" />
      <Compile Include="Assets\Scripts\Laser.js" />
+     <Compile Include="Assets\Scripts\Planet.js" />
      <Compile Include="Assets\Scripts\Ship Scripts\Ship.js" />
      <Compile Include="Assets\Scripts\SpaceObject.js" />
      <Compile Include="Assets\Scripts\Stars.js" />
