@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SpaceObject : MonoBehaviour {
-	Rigidbody rigbod;
+	public Rigidbody rigbod;
 	float leftConstraint = 0.0f;
 	float rightConstraint = 960.0f;
 	float buffer = 1.0f; // set this so the spaceship disappears offscreen before re-appearing on other side

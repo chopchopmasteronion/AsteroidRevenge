@@ -1,52 +1,57 @@
-﻿#pragma strict
-public class Asteroid extends SpaceObject {
-	var size: float;
-	var fasteroid: GameObject;
-	var splitForce: float;
-	var contact: ContactPoint;
-	var nav: NavMeshAgent;
-	
-	function Start () {
-		this.gameObject.transform.localScale = new Vector3(size, size, size);
-		rigbod = GetComponent.<Rigidbody>();
-	}
+﻿using UnityEngine;
+using System.Collections;
 
-	function Update () {
+public class Asteroid : SpaceObject {
+	float size;
+	GameObject fasteroid;
+	float splitForce;
+	ContactPoint contact;
+	NavMeshAgent nav;
+
+	// Use this for initialization
+	void Start () {
+		this.gameObject.transform.localScale = new Vector3(size, size, size);
+		rigbod = GetComponent<Rigidbody>();
+	}
+	
+	// Update is called once per frame
+	void Update () {
 		if(this.gameObject.transform.position.y !=0)
 		{
 			stable();
 		}
 	}
-	
-	function OnCollisionEnter(hit: Collision){
+
+
+	void OnCollisionEnter(Collision hit){
 		contact = hit.contacts[0];
 		if(hit.gameObject.name == "Laser(Clone)" || hit.gameObject.name == "barrier"){
 			split(contact.point);
 		}
 	}
-	
-	function split(splitPoint: Vector3) {
-		var astObj: GameObject;
+
+	void split(Vector3 splitPoint) {
+		GameObject astObj;
 		decrementSize(1);
 		splitPoint = Quaternion.Euler(0, -90, 0) * splitPoint/10;
 		if(size > 0.0) {
 			var astPos = this.transform.localPosition + splitPoint;
-			astObj=Instantiate(fasteroid, astPos, transform.localRotation);
-			astObj.GetComponent(Fasteroid).setSize(size);
-			astObj.GetComponent(Rigidbody).AddForce(splitPoint * splitForce);
+			astObj=(GameObject)Instantiate(fasteroid, astPos, transform.localRotation);
+			astObj.GetComponent<Fasteroid>().setSize(size);
+			astObj.GetComponent<Rigidbody>().AddForce(splitPoint * splitForce);
 			this.rigbod.AddForce(-splitPoint * splitForce);
 		}
 		else if(size < 0.1) {
 			GameObject.Destroy(this.gameObject);
 		}
 	}
-	
-	function decrementSize(decrementor:float) {
+
+	void decrementSize(float decrementor) {
 		size-=decrementor;
 		this.gameObject.transform.localScale = new Vector3(size, size, size);
 	}
-	
-	function setSize(s: float) {
+
+	void setSize(float s) {
 		size = s;
 		this.gameObject.transform.localScale = new Vector3(size, size, size);
 	}

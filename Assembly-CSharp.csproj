@@ -45,6 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Asteroid Scripts\Asteroid.cs" />
+     <Compile Include="Assets\Scripts\Asteroid Scripts\Fasteroid.cs" />
+     <Compile Include="Assets\Scripts\Ship Scripts\Ship.cs" />
      <Compile Include="Assets\Scripts\SpaceObject.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

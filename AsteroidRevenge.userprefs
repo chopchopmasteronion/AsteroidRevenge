@@ -1,10 +1,9 @@
-﻿<Properties StartupItem="Assembly-UnityScript.unityproj">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SpaceObject.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ship Scripts\Ship.js">
     <Files>
-      <File FileName="Assets\Scripts\SpaceObject.js" Line="16" Column="28" />
-      <File FileName="Assets\Scripts\Asteroid Scripts\Asteroid.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CameraControl.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Ship Scripts\Ship.js" Line="2" Column="1" />
+      <File FileName="Assets\Scripts\Ship Scripts\Ship.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
