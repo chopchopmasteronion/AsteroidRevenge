@@ -15,7 +15,7 @@ cam = GetComponent.<Camera>();
 }
 
 function Update () {
-	follow();
+	//follow();
 }
 
 function follow() {
