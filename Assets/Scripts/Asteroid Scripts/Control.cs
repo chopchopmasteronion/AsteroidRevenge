@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 
-public class Control : MonoBehaviour {
+public class Control : Asteroid
+{
+	int speed;
+	Vector3 moveDirection;
+	Rigidbody rigbod;
 
-	// Use this for initialization
 	void Start () {
-	
+		rigbod = GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-	
+		moveDirection.z = Input.GetAxis("Vertical");
+		moveDirection.x = Input.GetAxis("Horizontal");
+		rigbod.AddForce(moveDirection * speed);
+		rigbod.AddTorque(moveDirection * speed);
+	}
+
+	Vector3 getVelocity() {
+		return rigbod.velocity;
 	}
 }
