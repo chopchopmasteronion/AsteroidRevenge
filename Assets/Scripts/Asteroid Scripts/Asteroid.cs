@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class Asteroid : SpaceObject {
-	float size;
-	GameObject fasteroid;
-	float splitForce;
+	public float size;
+	public GameObject fasteroid;
+	public float splitForce;
 	ContactPoint contact;
 	NavMeshAgent nav;
 

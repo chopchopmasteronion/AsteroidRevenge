@@ -51,7 +51,6 @@
      <Compile Include="Assets\Scripts\Explosion.js" />
      <Compile Include="Assets\Scripts\Laser.js" />
      <Compile Include="Assets\Scripts\Planet.js" />
-     <Compile Include="Assets\Scripts\Ship Scripts\Ship.js" />
      <Compile Include="Assets\Scripts\SpaceObjectbk.js" />
      <Compile Include="Assets\Scripts\Stars.js" />
  <Reference Include="UnityEngine.UI">
