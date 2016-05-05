@@ -45,13 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Asteroid Scripts\Control.js" />
      <Compile Include="Assets\Scripts\Barrier.js" />
      <Compile Include="Assets\Scripts\CameraControl.js" />
      <Compile Include="Assets\Scripts\Explosion.js" />
      <Compile Include="Assets\Scripts\Laser.js" />
      <Compile Include="Assets\Scripts\Planet.js" />
-     <Compile Include="Assets\Scripts\SpaceObjectbk.js" />
      <Compile Include="Assets\Scripts\Stars.js" />
      <None Include="Assets\Shaders\CelShader.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

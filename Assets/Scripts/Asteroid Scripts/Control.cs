@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System;
 
-public class Control : Asteroid
+public class Control : MonoBehaviour
 {
-	int speed;
+	public int speed;
 	Vector3 moveDirection;
 	Rigidbody rigbod;
 
