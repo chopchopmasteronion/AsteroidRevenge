@@ -4,7 +4,7 @@ using System.Collections;
 public class Fasteroid : Asteroid {
 	int startingForce;
 	Vector3 moveDirection;
-	float moveTimer;
+	public float moveTimer;
 	// Use this for initialization
 	void Start () {
 		startingForce = Random.Range(0,2);

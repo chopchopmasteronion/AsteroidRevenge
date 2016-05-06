@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Asteroid Scripts\Control.cs" />
      <Compile Include="Assets\Scripts\Asteroid Scripts\Fasteroid.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\ScreenBounds.cs" />
      <Compile Include="Assets\Scripts\Ship Scripts\Ship.cs" />
      <Compile Include="Assets\Scripts\SpaceObject.cs" />
      <None Include="Assets\Shaders\CelShader.shader" />

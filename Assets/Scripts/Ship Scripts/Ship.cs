@@ -37,7 +37,7 @@ public class Ship : SpaceObject {
 
 		void  Update (){
 			stable();
-			Debug.Log(player.transform.position);
+			//Debug.Log(player.transform.position);
 			if(playerInRange){
 				follow(nav);
 			} else {

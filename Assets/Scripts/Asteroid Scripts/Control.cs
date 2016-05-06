@@ -5,7 +5,7 @@ public class Control : MonoBehaviour
 {
 	public int speed;
 	Vector3 moveDirection;
-	Rigidbody rigbod;
+	public Rigidbody rigbod;
 
 	void Start () {
 		rigbod = GetComponent<Rigidbody>();
