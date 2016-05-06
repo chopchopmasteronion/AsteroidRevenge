@@ -5,12 +5,11 @@ using UnityEngine;
 using System.Collections;
 
 public class Ship : SpaceObject {
-		Vector3 position;
+		public Vector3 position;
 		public GameObject explosionPrefab;
 		public GameObject laser;
 		public float shootTime;
 		public GameObject cannon;
-		int turnSpeed;
 		int startDir;
 		Transform target;
 		public Transform[] waypoints;
