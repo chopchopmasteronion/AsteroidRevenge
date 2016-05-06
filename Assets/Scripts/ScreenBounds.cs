@@ -29,7 +29,6 @@ public class ScreenBounds : MonoBehaviour
 
 	void Update() 
 	{
-		Debug.Log ("top constraint " + topConstraint);
 		if (this.transform.position.x < leftConstraint - buffer) { // ship is past world-space view / off screen
 			this.transform.position = new Vector3(rightConstraint + buffer, 0.0f, this.transform.position.z);  // move ship to opposite side
       }

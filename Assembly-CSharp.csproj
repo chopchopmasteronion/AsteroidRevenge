@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\ScreenBounds.cs" />
      <Compile Include="Assets\Scripts\Ship Scripts\Ship.cs" />
      <Compile Include="Assets\Scripts\SpaceObject.cs" />
+     <Compile Include="Assets\Scripts\UI\Timer.cs" />
      <None Include="Assets\Shaders\CelShader.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
