@@ -114,14 +114,16 @@ public class Ship : SpaceObject {
 
 
 
-		void  patrol (){	
-			patrolTimer += Time.deltaTime;
-			if(patrolTimer >= 10)
-			{
-				waypointIndex = Random.Range(0,(waypoints.Length - 1));
-				patrolTimer = 0;
-			}
-			nav.destination = waypoints[waypointIndex].position;
-		}
+	    void  patrol (){	
+			// Is agent still alive?
+			if (GameObject.Find (nav.ToString()) != null) {
+				patrolTimer += Time.deltaTime;
+				if (patrolTimer >= 10) {
+					waypointIndex = Random.Range (0, (waypoints.Length - 1));
+					patrolTimer = 0;
+				}
 
+				nav.destination = waypoints [waypointIndex].position;
+			}
+		}
 	}
