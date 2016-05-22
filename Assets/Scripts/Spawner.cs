@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
 
 	void Update ()
 	{
-		Spawn();
+		//Spawn();
 	}
 
 	void Spawn ()

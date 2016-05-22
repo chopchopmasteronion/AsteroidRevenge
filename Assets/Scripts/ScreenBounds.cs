@@ -31,11 +31,11 @@ public class ScreenBounds : MonoBehaviour
 	{
 		if (this.transform.position.x < leftConstraint - buffer) { // ship is past world-space view / off screen
 			this.transform.position = new Vector3(rightConstraint + buffer, 0.0f, this.transform.position.z);  // move ship to opposite side
-      }
+      	}
  
       	if (this.transform.position.x > rightConstraint + buffer) {
 			this.transform.position = new Vector3(leftConstraint - buffer, 0.0f, this.transform.position.z);
-      }
+      	}
 
 		if (this.transform.position.z < bottomConstraint - buffer) { // ship is past world-space view / off screen
 			this.transform.position = new Vector3(this.transform.position.x, 0.0f, topConstraint + buffer);  // move ship to opposite side
