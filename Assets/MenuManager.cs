@@ -19,4 +19,8 @@ public class MenuManager : MonoBehaviour {
 	public void LoadLevel(){
 		Application.LoadLevel ("debug");
 	}
+
+	public void exitGame() {
+		Application.Quit ();
+	}
 }
