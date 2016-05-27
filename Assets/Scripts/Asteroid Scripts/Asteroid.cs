@@ -5,12 +5,13 @@ public class Asteroid : SpaceObject {
 	public float size;
 	public GameObject fasteroid;
 	public float splitForce;
+	public AudioClip hitSound;
 	ContactPoint contact;
 	NavMeshAgent nav;
-
 	// Use this for initialization
 	void Start () {
 		this.gameObject.transform.localScale = new Vector3(size, size, size);
+		source = GetComponent<AudioSource>();
 		rigbod = GetComponent<Rigidbody>();
 	}
 	
@@ -32,8 +33,9 @@ public class Asteroid : SpaceObject {
 
 	void split(Vector3 splitPoint) {
 		GameObject astObj;
-		decrementSize(1);
+		decrementSize(2);
 		splitPoint = Quaternion.Euler(0, -90, 0) * splitPoint/10;
+		source.PlayOneShot(hitSound);
 		if(size > 0.0) {
 			var astPos = this.transform.localPosition + splitPoint;
 			astObj=(GameObject)Instantiate(fasteroid, astPos, transform.localRotation);

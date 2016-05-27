@@ -5,125 +5,127 @@ using UnityEngine;
 using System.Collections;
 
 public class Ship : SpaceObject {
-		public Vector3 position;
-		public GameObject explosionPrefab;
-		public GameObject laser;
-		public float shootTime;
-		public GameObject cannon;
-		int startDir;
-		Transform target;
-		public Transform[] waypoints;
-		int waypointIndex;
-		float patrolTimer;
-		bool  objectInSight;
-		bool  playerInRange;
-		float fieldOfViewAngle = 110f;
-		public GameObject player;
-		private NavMeshAgent nav; 
-		private SphereCollider col;
-		private float shootTimer;
+	public Vector3 position;
+	public GameObject explosionPrefab;
+	public GameObject laser;
+	public float shootTime;
+	public GameObject cannon;
+    public AudioClip shootSound;
+	int startDir;
+	Transform target;
+	public Transform[] waypoints;
+	int waypointIndex;
+	float patrolTimer;
+	bool  objectInSight;
+	bool  playerInRange;
+	float fieldOfViewAngle = 110f;
+	public GameObject player;
+	private NavMeshAgent nav; 
+	private SphereCollider col;
+	private float shootTimer;
+	void  Start (){
+		getCannon();
+		player = GameObject.FindGameObjectWithTag("Player");
+		shootTimer = shootTime;
+		startDir = Random.Range(0,2);
+		rigbod = GetComponent<Rigidbody>();
+		col = GetComponent<SphereCollider>();
+		nav = GetComponent<NavMeshAgent>();
+		waypointIndex = Random.Range(0,(waypoints.Length - 1));
+		source = GetComponent<AudioSource>();
+	}
 
-		void  Start (){
-			getCannon();
-			player = GameObject.FindGameObjectWithTag("Player");
+	void  Update (){
+		stable();
+		//Debug.Log(player.transform.position);
+		if(playerInRange){
+			follow(nav);
+		} else {
+			patrol();
+		}
+
+		if(objectInSight) {
+			Shoot();
+		}
+	}
+
+	void  getCannon (){
+		cannon = this.gameObject.transform.GetChild(0).gameObject;
+	}
+
+	void  OnCollisionEnter ( Collision hit  ){
+		GameObject.Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		GameObject.Destroy(this.gameObject);
+	}
+
+	void  Shoot (){
+		if(shootTimer < 0) {
+
+			Instantiate(laser, this.cannon.transform.position , this.cannon.transform.rotation);
+			source.PlayOneShot(shootSound);
 			shootTimer = shootTime;
-			startDir = Random.Range(0,2);
-			rigbod = GetComponent<Rigidbody>();
-			col = GetComponent<SphereCollider>();
-			nav = GetComponent<NavMeshAgent>();
-			waypointIndex = Random.Range(0,(waypoints.Length - 1));
+		}
+		else {
+			shootTimer-=Time.deltaTime;
 		}
 
-		void  Update (){
-			stable();
-			//Debug.Log(player.transform.position);
-			if(playerInRange){
-				follow(nav);
-			} else {
-				patrol();
+	}
+
+
+	void  OnTriggerStay ( Collider other  ){
+		if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player) {
+			objectInSight = false;
+			Vector3 direction = other.transform.position - transform.position;
+			float angle = Vector3.Angle(direction, transform.forward);
+			if(other.gameObject == player) {
+				playerInRange = true;
 			}
-
-			if(objectInSight) {
-				Shoot();
-			}
-		}
-
-		void  getCannon (){
-			cannon = this.gameObject.transform.GetChild(0).gameObject;
-		}
-
-		void  OnCollisionEnter ( Collision hit  ){
-			GameObject.Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-			GameObject.Destroy(this.gameObject);
-		}
-
-		void  Shoot (){
-			if(shootTimer < 0) {
-
-				Instantiate(laser, this.cannon.transform.position , this.cannon.transform.rotation);
-				shootTimer = shootTime;
-			}
-			else {
-				shootTimer-=Time.deltaTime;
-			}
-
-		}
-
-
-		void  OnTriggerStay ( Collider other  ){
-			if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player) {
-				objectInSight = false;
-				Vector3 direction = other.transform.position - transform.position;
-				float angle = Vector3.Angle(direction, transform.forward);
-				if(other.gameObject == player) {
-					playerInRange = true;
-				}
-				if(angle < fieldOfViewAngle * 0.5f)
+			if(angle < fieldOfViewAngle * 0.5f)
+			{
+				RaycastHit hit;   
+				// ... and if a raycast towards the player hits something...
+				if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
 				{
-					RaycastHit hit;   
-					// ... and if a raycast towards the player hits something...
-					if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
+					// ... and if the raycast hits the player...
+					if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player)
 					{
-						// ... and if the raycast hits the player...
-						if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player)
-						{
-							// ... the player is in sight.
-							objectInSight = true;
-							// Set the last global sighting is the players current position.
-							//lastPlayerSighting.position = player.transform.position;
+						// ... the player is in sight.
+						objectInSight = true;
+						// Set the last global sighting is the players current position.
+						//lastPlayerSighting.position = player.transform.position;
 
-						}
 					}
 				}
 			}
 		}
+	}
 
-		void  OnTriggerExit ( Collider other  ){
-			// If the player leaves the trigger zone...
-			if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player)
-				// ... the player is not in sight.
-				objectInSight = false;
-			//playerInRange = false;
-		}
-
-
-		void  follow ( NavMeshAgent agent  ){
-			//agent = GetComponent.<NavMeshAgent>();
-			agent.destination = player.transform.position; 
-		}
+	void  OnTriggerExit ( Collider other  ){
+		// If the player leaves the trigger zone...
+		if(other.gameObject.tag ==  "Fasteroid" || other.gameObject == player)
+			// ... the player is not in sight.
+			objectInSight = false;
+		//playerInRange = false;
+	}
 
 
+	void  follow ( NavMeshAgent agent  ){
+		//agent = GetComponent.<NavMeshAgent>();
+		agent.destination = player.transform.position; 
+	}
 
-	    void  patrol (){	
-			// Is agent still alive?
-			if (GameObject.Find (nav.ToString()) != null) {
-				patrolTimer += Time.deltaTime;
-				if (patrolTimer >= 10) {
-					waypointIndex = Random.Range (0, (waypoints.Length - 1));
-					patrolTimer = 0;
-				}
 
-				nav.destination = waypoints [waypointIndex].position;
+
+    void  patrol (){	
+		// Is agent still alive?
+		if (GameObject.Find (nav.ToString()) != null) {
+			patrolTimer += Time.deltaTime;
+			if (patrolTimer >= 10) {
+				waypointIndex = Random.Range (0, (waypoints.Length - 1));
+				patrolTimer = 0;
 			}
+
+			nav.destination = waypoints [waypointIndex].position;
 		}
 	}
+}
