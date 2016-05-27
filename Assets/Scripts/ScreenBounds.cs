@@ -22,7 +22,7 @@ public class ScreenBounds : MonoBehaviour
 		// using a specific distance
 		leftConstraint = Camera.main.ScreenToWorldPoint( new Vector3(0.0f, distanceY, 0.0f) ).x;
 		rightConstraint = Camera.main.ScreenToWorldPoint( new Vector3(Screen.width, distanceY, 0.0f) ).x;
-		topConstraint = Camera.main.ScreenToWorldPoint (new Vector3 (0.0f, Screen.height, distanceY) ).z;
+		topConstraint = Camera.main.ScreenToWorldPoint (new Vector3 (0.0f, Screen.height - 60, distanceY) ).z;
 		bottomConstraint = Camera.main.ScreenToWorldPoint (new Vector3 (0.0f, 0.0f, distanceY) ).z;
 
 	}
