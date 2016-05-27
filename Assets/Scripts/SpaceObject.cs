@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpaceObject : MonoBehaviour {
 	public Rigidbody rigbod;
+	public AudioSource source;
 
 
 	void Start () {

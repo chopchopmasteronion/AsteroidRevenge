@@ -5,11 +5,13 @@ public class Fasteroid : Asteroid {
 	int startingForce;
 	Vector3 moveDirection;
 	public float moveTimer;
+
 	// Use this for initialization
 	void Start () {
 		startingForce = Random.Range(0,2);
 		moveDirection = randomMovement();
 		rigbod = GetComponent<Rigidbody>();
+		source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
