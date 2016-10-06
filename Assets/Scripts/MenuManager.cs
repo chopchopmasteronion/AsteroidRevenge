@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MenuManager : MonoBehaviour {
 	public Menu CurrentMenu;
-	bool isPause = false;
+	public bool isPause = false;
 
 	public void Start() {
 		if (CurrentMenu != null) 
@@ -26,11 +26,13 @@ public class MenuManager : MonoBehaviour {
 		Application.Quit ();
 	}
 
-	public void pauseGame(bool pauseStatus) {
-		if (pauseStatus == true) {
+	public void pauseGame() {
+		if (isPause == false) {
 			Time.timeScale = 0;
+			isPause = true;
 		} else {
 			Time.timeScale = 1;
+			isPause = false;
 		}
 	}
 }
